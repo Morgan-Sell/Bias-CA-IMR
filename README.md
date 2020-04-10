@@ -36,3 +36,8 @@ of other ages. (See chart below.)
 ## Hypothesis Testing
 > $$ H_0: Child's expected overturn rate = Expected overturn rate of patients who are 11 years and older $$
 > $$ H_A: Child's expected overturn rate \geq Expected overturn rate of patients who are 11 years and older $$
+
+With ~98% level of confidence, one can conclude that the the the expected overturn rate of the population of the two observed groups 
+- children who are 10 years and younger and people who are 11 years and older - are **not** equal. 
+The below distribution shows the p-value to be approximately equal to a 1.0% significance level assuming a one-sided test.
+
