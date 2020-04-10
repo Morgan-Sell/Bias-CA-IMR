@@ -1,7 +1,7 @@
 # California's Independenet Medical of Review
 ## Are arbitrators persuaded by elements other than the facts?
 
-<<INSERT MEDICAL/HEALTHCARE RELATED PNG>>
+![Healthcare](https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/Healthcare_workforce.jpg)
 
 ## Table of Contents
 
@@ -23,4 +23,16 @@ In October 2013, California launched "Covered California" as its response to the
 
 A point of interest is what drove the increase in percentage of IMRs that resulted in an overturn ruling, i.e. 51% and 56% in 2015 and 2016, respectively. Excluding 2020, 16 out of 17 years have shows percentages ranging form 33 to 49% of the other years show the percentage. Both the mean and median of those 17 years are ~45%.
 
-! [Image of Annual Plot] https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/annual_trend.png
+![Annual Plot](https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/annual_trend.png)
+
+
+During the exploratory data analysis, I searched for areas that potentially had bias. In one plot, I compared the likelihood of a case being overturned by the patient's age group. 
+After discovering the difference in the "overturn rate" in the sample dataset, I decided totest the hypothesis that the a child's "overturn rate" is equal to that of patients
+of other ages. (See chart below.)
+
+
+![Age Plot](https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/age.png)
+
+## Hypothesis Testing
+> $$ H_0: Child's expected overturn rate = Expected overturn rate of patients who are 11 years and older $$
+> $$ H_A: Child's expected overturn rate \geq Expected overturn rate of patients who are 11 years and older $$
