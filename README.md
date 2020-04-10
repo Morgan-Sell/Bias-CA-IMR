@@ -41,3 +41,14 @@ With ~98% level of confidence, one can conclude that the the the expected overtu
 - children who are 10 years and younger and people who are 11 years and older - are **not** equal. 
 The below distribution shows the p-value to be approximately equal to a 1.0% significance level assuming a one-sided test.
 
+![Sampling Distribution](https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/p_val.png)
+
+### Type 1 & 2 Error Rates and Statistical Power
+
+The following plot displays the likelihood of incorrectly concluding that the expected overturn rate of children and remainder of the population are **not** equal,  when in fact they are.
+The region labeled $\alpha$, which is know as the false positive rate and type I error, visualizes the probability. 
+
+Additionally, the plot also shows the probability of mistakenly claiming the overturn rates of the two populations are equal when, in reality, the overturn rates are not equal.
+The area labeled $\beta$, which is call the false negative and type II error, displays the probability.
+
+![Alpha Beta](https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/alpha_beta.png)
