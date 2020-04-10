@@ -22,3 +22,5 @@ My intention is not to say that biases should not exist; however, I believe that
 In October 2013, California launched "Covered California" as its response to the Affordable Care Act. As expected, the data shows a significant uptick in IMRs starting in 2013.
 
 A point of interest is what drove the increase in percentage of IMRs that resulted in an overturn ruling, i.e. 51% and 56% in 2015 and 2016, respectively. Excluding 2020, 16 out of 17 years have shows percentages ranging form 33 to 49% of the other years show the percentage. Both the mean and median of those 17 years are ~45%.
+
+! [Image of Annual Plot] https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/annual_trend.png
