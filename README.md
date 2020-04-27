@@ -53,7 +53,7 @@ As the p-value for the experiment is ~2.0%, the null hypothesis  can be rejected
 By analyzing the sampling distribution under the null hypothesis, the p-value is approximately equal to a 1.0% significance level assuming a one-sided test.
 
 
-![Sampling Distribution](https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/p_val.png)
+![Sampling Distribution](https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/p_val.png
 
 #### Type I & II Errors
 
