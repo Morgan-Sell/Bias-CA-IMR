@@ -1,4 +1,4 @@
-# California's Independent Medical of Review
+# Impartiality Assessment of California's Independent Medical Reviews
 ### *Are arbitrators persuaded by elements other than the facts?*
 
 ![Healthcare](https://github.com/Morgan-Sell/CA-Indepedent-Medical-Review/blob/individual/images/Healthcare_workforce.jpg)
