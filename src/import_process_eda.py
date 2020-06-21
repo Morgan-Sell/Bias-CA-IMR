@@ -1,12 +1,13 @@
 import pandas as pd
 import numpy as np
-import matplotline.pyplot as plt
+import matptlotlib.pyplot as plt
 import seaborn as sns
 
 
 def import_process_csv():
     '''
     Imports the California Department of Managed Health Care (DMHC) csv file.
+
     Resolves null values.
     Feature engineering.
 
@@ -19,7 +20,7 @@ def import_process_csv():
     imr = pd.read_csv('../data/imr_trends.csv')
     imr2 = imr['DaysToReview'].fillna(imr['DaysToReview'].median())
     imr2['len_findings'] = imr2['Findings'].apply(len)
-    imr2['determination_code'] = imr3['Determination'].map({'Upheld Decision of Health Plan' : 0, 'Overturned Decision of Health Plan' : 1})
+    imr2['determination_code'] = imr2['Determination'].map({'Upheld Decision of Health Plan' : 0, 'Overturned Decision of Health Plan' : 1})
     return imr2
 
 
@@ -137,7 +138,7 @@ def calc_prcnt_overturned_by_age(dataset):
     '''
 
 
-    age_grpd = imr2.groupby(['AgeRange', 'Determination']).agg({'Determination':'count'}).unstack()
+    age_grpd = dataset.groupby(['AgeRange', 'Determination']).agg({'Determination':'count'}).unstack()
 
     age_grpd.rename({'Overturned Decision of Health Plan': 'overturned', 'Upheld Decision of Health Plan':'upheld'},
                 axis=1, inplace=True)
@@ -185,10 +186,10 @@ def plot_imr_results_by_reason_for_procedure(dataset):
     '''
 
     plt.figure(figsize=(12,5))
-    sns.countplot(x='Type', data=imr2, hue='Determination')
+    sns.countplot(x='Type', data=dataset, hue='Determination')
     plt.title('IMR Results by Reason for Procedure', fontsize=20, fontweight='bold')
     plt.tight_layout()
-    plt.show();
+    plt.show()
 
 def plot_imr_results_by_patient_diagnosis(dataset):
     '''
@@ -207,7 +208,7 @@ def plot_imr_results_by_patient_diagnosis(dataset):
     ax.set_title('Determination Results by Patient Diagnosis Category', fontsize=20, fontweight='bold')
     ax.tick_params(labelrotation=90)
     plt.tight_layout()
-    plt.show();
+    plt.show()
 
 def plot_imr_results_by_treatment_category(dataset):
     '''
@@ -226,10 +227,10 @@ def plot_imr_results_by_treatment_category(dataset):
     ax.set_title('Determination Results by Treatment Category', fontsize=20, fontweight='bold')
     ax.tick_params(labelrotation=90)
     plt.tight_layout()
-    plt.show();
+    plt.show()
 
-if __name__ == "__main__":
 
+if __name__ == '__main__':
     imr = import_process_csv()
 
     # Product EDA
