@@ -126,11 +126,6 @@ def calc_plot_alpha_beta(mu_h_0, std_err, sig_lev, sig_lev_dict, h_0_dist, h_a_d
     ------
 
     '''
-
-    lim_95 = mu_h_0 + 1.96 * std_err
-    lim_98 = mu_h_0 + 2.326 * std_err
-    lim_99 = mu_h_0 + 2.58 * std_err
-    sig_lev_dict = {0.05: lim_95, 0.02: lim_98, 0.01: lim_99}
     alpha = sig_lev / 2
     beta = h_a_dist.cdf(sig_lev_dict[sig_lev])
 
@@ -219,53 +214,53 @@ def power_analysis(h_a_dist, h_0_dist, sig_lev, sig_lev_dict):
     print('Power = {:.3f}'.format(power))
 
 
+if __name__ == '__main__':
+    # code
 
-# code
+    imr = import_process_csv()
+    children = np.asarray(imr[imr['AgeRange'] == '11 to 20']['determination_encoded'])
+    others = np.asarray(imr[imr['AgeRange'] != '11 to 20']['determination_encoded'])
 
-imr = import_process_csv()
-children = np.asarray(imr[imr['AgeRange'] == '11 to 20']['determination_encoded'])
-others = np.asarray(imr[imr['AgeRange'] != '11 to 20']['determination_encoded'])
+    mu_h_0 = 0
+    n_child = len(children)
+    p_c = sum(children) / n_child
 
-mu_h_0 = 0
-n_child = len(children)
-p_c = sum(children) / n_child
+    n_others = len(others)
+    p_o = sum(others) / n_others
 
-n_others = len(others)
-p_o = sum(others) / n_others
+    p_shared = sum(imr['determination_encoded']) / len(imr['determination_encoded'])
+    var_shared = p_shared * (1 - p_shared) / n_child + p_shared * (1 - p_shared) / n_others
+    std_err_shared = np.sqrt(var_shared)
+    # mu for the alternative hypothesis
+    mu_h_a  = p_c - p_o
 
-p_shared = sum(imr['determination_encoded']) / len(imr['determination_encoded'])
-var_shared = p_shared * (1 - p_shared) / n_child + p_shared * (1 - p_shared) / n_others
-std_err_shared = np.sqrt(var_shared)
-# mu for the alternative hypothesis
-mu_h_a  = p_c - p_o
+    # Calculate alternative and null hypotheses distributions.
+    h_0_dist = stats.norm(mu_h_0, std_err_shared)
+    h_a_dist = stats.norm(mu_h_a, std_err_shared)
 
-# Calculate alternative and null hypotheses distributions.
-h_0_dist = stats.norm(mu_h_0, std_err_shared)
-h_a_dist = stats.norm(mu_h_a, std_err_shared)
+    print('Probability for children: {:.4f}'.format(p_c))
+    print('Probability for all other age: {:.4f}'.format(p_o))
+    print("Difference in the sample probabilities: {:.4f}".format(mu_h_a))
 
-print('Probability for children: {:.4f}'.format(p_c))
-print('Probability for all other age: {:.4f}'.format(p_o))
-print("Difference in the sample probabilities: {:.4f}".format(mu_h_a))
+    plot_sampling_distribution(mu_h_0, std_err_shared)
 
-plot_sampling_distribution(mu_h_0, std_err_shared)
+    # Apply Welch's T-test b/c significant difference in sample size between the two age group.
+    var_children = np.var(children)
+    var_others = np.var(others)
 
-# Apply Welch's T-test b/c significant difference in sample size between the two age group.
-var_children = np.var(children)
-var_others = np.var(others)
+    print("Children sample variance: {:.4f}".format(var_children))
+    print("Children sample size: {:.0f}".format(n_child))
+    print("Others sample variance: {:.4f}".format(var_others))
+    print("Others sample size: {:.0f}".format(n_others))
 
-print("Children sample variance: {:.4f}".format(var_children))
-print("Children sample size: {:.0f}".format(n_child))
-print("Others sample variance: {:.4f}".format(var_others))
-print("Others sample size: {:.0f}".format(n_others))
+    t_stat = welch_t_test(children, others)
+    scipy_t_stat, scipy_p_val =stats.ttest_ind(children, others, equal_var = False)
+    print("Welch's t-statistic: {:2.4f}".format(t_stat))
+    print("Scipy's Welch's t-statistic: {:2.4f}".format(scipy_t_stat))
+    print("Scipy's Welch's t-statistic: {:2.4f}".format(scipy_p_val))
 
-t_stat = welch_t_test(children, others)
-scipy_t_stat, scipy_p_val =stats.ttest_ind(children, others, equal_var = False)
-print("Welch's t-statistic: {:2.4f}".format(t_stat))
-print("Scipy's Welch's t-statistic: {:2.4f}".format(scipy_t_stat))
-print("Scipy's Welch's t-statistic: {:2.4f}".format(scipy_p_val))
+    # Calculate alpha and beta
 
-# Calculate alpha and beta
-
-sig_lev_dict = create_sig_lev_dict(mu_h_0, std_err_shared)
-calc_plot_alpha_beta(mu_h_0, std_err, sig_lev, 0.05, h_0_dist, h_a_dist)
-power_analysis(h_a_dist, h_0_dist, 0.5, sig_lev_dict):
+    sig_lev_dict = create_sig_lev_dict(mu_h_0, std_err_shared)
+    calc_plot_alpha_beta(mu_h_0, std_err, sig_lev, 0.05, h_0_dist, h_a_dist)
+    power_analysis(h_a_dist, h_0_dist, 0.5, sig_lev_dict)
